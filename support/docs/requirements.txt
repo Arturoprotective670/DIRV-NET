@@ -1,0 +1,144 @@
+
+
+# it is better to use mambaforge:
+# https://github.com/conda-forge/miniforge#mambaforge
+
+# and to use mamba instead of conda:
+# https://mamba.readthedocs.io/en/latest/installation.html
+
+# mamba env create -f docs/environment.yml
+
+# use python 3.9.x
+
+# the main needed packages, are as follows (as 'mamba list' reports) :
+Name                    Version                   Build  Channel
+
+cuda-nvcc                 12.0.76                       0    nvidia
+cudatoolkit               11.2.0               h73cb219_9    conda-forge
+cudnn                     8.4.1.50             hed8a83a_0    conda-forge
+ipykernel                 6.21.1             pyh210e3f2_0    conda-forge
+ipython                   8.9.0              pyh41d4057_0    conda-forge
+jupyter_client            7.4.9              pyhd8ed1ab_0    conda-forge
+jupyter_core              5.2.0            py39hf3d152e_0    conda-forge
+keras                     2.11.0                   pypi_0    pypi
+keras-preprocessing       1.1.2              pyhd8ed1ab_0    conda-forge
+matplotlib                3.6.2            py39hf3d152e_0    conda-forge
+matplotlib-base           3.6.2            py39hf9fd14e_0    conda-forge
+matplotlib-inline         0.1.6              pyhd8ed1ab_0    conda-forge
+numpy                     1.23.5           py39h3d75532_0    conda-forge
+nvidia-ml-py              11.515.75          pyhd8ed1ab_0    conda-forge
+openexr                   1.3.9                    pypi_0    pypi
+pillow                    9.3.0                    pypi_0    pypi
+pip                       22.3.1             pyhd8ed1ab_0    conda-forge
+python                    3.9.15          h47a2c10_0_cpython    conda-forge
+scikit-learn              1.2.0            py39h86b2a18_0    conda-forge
+scipy                     1.9.3                    pypi_0    pypi
+setuptools                65.5.1             pyhd8ed1ab_0    conda-forge
+simpleitk                 2.2.1            py39hdaa313e_1    conda-forge
+tensorboard               2.11.0                   pypi_0    pypi
+tensorboard-data-server   0.6.1            py39hd97740a_4    conda-forge
+tensorboard-plugin-wit    1.8.1              pyhd8ed1ab_0    conda-forge
+tensorflow                2.11.0                   pypi_0    pypi
+tensorflow-addons         0.19.0                   pypi_0    pypi
+tensorflow-base           2.10.0          cuda112py39h2957820_0    conda-forge
+tensorflow-datasets       4.7.0                    pypi_0    pypi
+tensorflow-estimator      2.11.0                   pypi_0    pypi
+tensorflow-graphics       2021.12.3                pypi_0    pypi
+tensorflow-io-gcs-filesystem 0.28.0                   pypi_0    pypi
+tensorflow-metadata       1.12.0                   pypi_0    pypi
+yapf                      0.32.0             pyhd8ed1ab_0    conda-forge
+
+# main packages as reported by pip list (note that some packages has diffrent
+# versions in pip and conda)
+
+Package                       Version
+----------------------------- ---------
+h5py                          3.7.0
+importlib-metadata            5.1.0
+importlib-resources           5.10.1
+ipykernel                     6.21.1
+ipython                       8.9.0
+jupyter_client                7.4.9
+jupyter_core                  5.2.0
+keras                         2.11.0
+Keras-Preprocessing           1.1.2
+matplotlib                    3.6.2
+matplotlib-inline             0.1.6
+numpy                         1.23.5
+nvidia-ml-py                  11.515.75
+OpenEXR                       1.3.9
+Pillow                        9.3.0
+pip                           22.3.1
+pyu2f                         0.1.5
+pyzmq                         25.0.0
+scikit-learn                  1.2.0
+scipy                         1.9.3
+setuptools                    65.5.1
+SimpleITK                     2.2.1
+tensorboard                   2.11.0
+tensorboard-data-server       0.6.1
+tensorboard-plugin-wit        1.8.1
+tensorflow                    2.11.0
+tensorflow-addons             0.19.0
+tensorflow-datasets           4.7.0
+tensorflow-estimator          2.11.0
+tensorflow-graphics           2021.12.3
+tensorflow-io-gcs-filesystem  0.28.0
+tensorflow-metadata           1.12.0
+tqdm                          4.64.1
+trimesh                       3.17.1
+yapf                          0.32.0
+
+# there are a lot of versioning issues with those packages
+# make sure to install with pip when mentioned below, otherwise
+# envirnemnt can get corrupted, see:
+# https://www.tensorflow.org/install/pip
+# https://www.tensorflow.org/install/source#linux
+
+# run first:
+pip install --upgrade pip
+
+# to install, the order of installetion is important, below worked:
+
+pip install tensorflow-graphics==2021.12.3
+
+mamba install -y cudatoolkit=11.2.0
+mamba install -y tensorflow=2.10
+mamba install -y -c nvidia cuda-nvcc
+mamba install -y scikit-learn
+mamba install -y matplotlib
+mamba install -y simpleitk
+
+pip install --upgrade OpenEXR
+
+# above needs tensorrt 7.0 version, but below can install only v8 for some reason
+pip3 install --upgrade setuptools pip
+pip install nvidia-pyindex
+pip install nvidia-tensorrt
+
+# important to import pathes
+export LD_LIBRARY_PATH=/mnt/asgard2/code/{your_name}/mambaforge/envs/{envirnmnet_name}/lib/
+export XLA_FLAGS=--xla_gpu_cuda_data_dir=/mnt/asgard2/code/{your_name}/mambaforge/envs/{envirnmnet_name}/nvvm/libdevice
+
+# to extract NVidia GPU info
+pip install nvidia-ml-py3
+
+# Notes:
+# -------
+
+# 1) since tensorflow 2.0, it dose not distinguish tensorflow-cpu from tensorflow-gpu, see:
+# https://stackoverflow.com/a/64218003
+
+# 2) Some times (this why this in notes) auto switch LD_LIBRARY_PATH on envirnment
+# activation is needed, for that excute:
+conda env config vars set LD_PRELOAD=$CONDA_PREFIX/lib/libcudart.so:$CONDA_PREFIX/lib/libcublas.so:$CONDA_PREFIX/lib/libcublasLt.so:$CONDA_PREFIX/lib/libcufft.so:$CONDA_PREFIX/lib/libcurand.so:$CONDA_PREFIX/lib/libcusolver.so:$CONDA_PREFIX/lib/libcusparse.so:$CONDA_PREFIX/lib/libcudnn.so
+# sub-note: you need to activate a different env. and run something in it, then
+# activate back the target env., to make it work.
+# source: https://github.com/tensorflow/tensorflow/issues/52988#issuecomment-1160849524
+
+# 3) if you are getting a lot ( more than 2-3) of errors of the format:
+# "dynamic library libcudart.so.xx.x" loading failed
+# you need also to excute (sometimes, for unclear reasons, this is not needed,
+# this why it is in notes):
+conda install cuDNN={version}
+# see https://github.com/google/jax/discussions/6843#discussioncomment-2721688
